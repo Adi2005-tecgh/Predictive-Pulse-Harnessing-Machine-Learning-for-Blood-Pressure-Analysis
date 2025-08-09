@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Predictive Pulse - Home</title>
+
+    <!-- Embedded Black Theme CSS -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #121212;
+        color: #ffffff;
+        line-height: 1.6;
+      }
+
+      header.navbar {
+        background-color: #1e1e1e;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid #333;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo img {
+        height: 40px;
+        border-radius: 50%;
+      }
+
+      .logo span {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #00ffcc;
+      }
+
+      .nav-links ul {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+      }
+
+      .nav-links ul li a {
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links ul li a:hover {
+        color: #00ffcc;
+      }
+
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .menu-toggle span {
+        height: 3px;
+        width: 25px;
+        background: white;
+        margin-bottom: 5px;
+      }
+
+      .landing {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 85vh;
+        padding: 0 2rem;
+        background: linear-gradient(to right, #121212, #1e1e1e);
+      }
+
+      .landing-content {
+        max-width: 800px;
+        text-align: center;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+        color: #00ffcc;
+        margin-bottom: 1rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+        margin: 1.2rem 0;
+        color: #d3d3d3;
+      }
+
+      .cta-button {
+        padding: 0.8rem 1.5rem;
+        background-color: #00ffcc;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .cta-button:hover {
+        background-color: #00e6b8;
+      }
+
+      .contact-section {
+        background-color: #1a1a1a;
+        padding: 2rem;
+        text-align: center;
+        border-top: 1px solid #333;
+      }
+
+      .contact-section h2 {
+        color: #00ffcc;
+        margin-bottom: 1rem;
+      }
+
+      .contact-section a {
+        color: #00ffcc;
+        text-decoration: none;
+      }
+
+      .contact-section a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links ul {
+          display: none;
+          flex-direction: column;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        .nav-links.active ul {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="navbar">
+      <!-- Logo -->
+      <div class="logo">
+<!--        <img src="{{ url_for('static', filename='img/logo.jpeg') }}" alt="Logo" />-->
+        <span>PredictivePulse</span>
+      </div>
+
+      <!-- Hamburger Icon -->
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="nav-links" id="navLinks">
+        <ul>
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('details') }}">About</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+          <li>
+            <a id="Checkbtn" href="{{ url_for('predict_page') }}">Check Your BP Stage</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="landing">
+      <div class="landing-content">
+        <h1 class="hero-title">Welcome to Predictive Pulse 🩺</h1>
+        <h2><span id="typed-text"></span><span class="cursor">|</span></h2>
+        <p class="hero-subtitle">
+          Let us walk beside you on your health journey. From early detection to
+          meaningful recommendations, we make blood pressure tracking easy,
+          insightful, and centered on <em>you</em>.
+        </p>
+        <a class="cta-button" href="{{ url_for('predict_page') }}">
+          Check Your Blood Pressure Stage
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <footer id="contact" class="contact-section">
+      <h2>Contact to Amrut Katkar</h2>
+      <p>Have questions or feedback? We’d love to hear from you!</p>
+      <ul>
+        <li>
+          Email:
+          <a href="mailto:support@predictivepulse.ai">predictivepulseai.gmail.com</a>
+        </li>
+        <li>Phone: +91-9767101628</li>
+        <li>
+          Follow us on:
+          <a href="#">Twitter</a> |
+          <a href="#">LinkedIn</a> |
+          <a href="#">GitHub</a>
+        </li>
+      </ul>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        const nav = document.getElementById("navLinks");
+        nav.classList.toggle("active");
+      }
+    </script>
+  </body>
+</html>

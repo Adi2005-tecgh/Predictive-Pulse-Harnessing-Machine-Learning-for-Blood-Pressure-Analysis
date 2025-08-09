@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Predictive Pulse</title>
+
+    <!-- Embedded Black Theme CSS -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #121212;
+        color: #ffffff;
+      }
+
+      header.navbar {
+        background-color: #1e1e1e;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid #333;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo img {
+        height: 40px;
+        border-radius: 50%;
+      }
+
+      .logo span {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #00ffcc;
+      }
+
+      .nav-links ul {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+      }
+
+      .nav-links ul li a {
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links ul li a:hover {
+        color: #00ffcc;
+      }
+
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .menu-toggle span {
+        height: 3px;
+        width: 25px;
+        background: white;
+        margin-bottom: 5px;
+      }
+
+      .form-card {
+        background-color: #1e1e1e;
+        max-width: 800px;
+        margin: 3rem auto;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+      }
+
+      .form-card h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #00ffcc;
+      }
+
+      .form-grid {
+        display: grid;
+        gap: 1rem;
+      }
+
+      select,
+      button {
+        width: 100%;
+        padding: 0.8rem;
+        border-radius: 6px;
+        border: none;
+        background-color: #2e2e2e;
+        color: #ffffff;
+        font-size: 1rem;
+      }
+
+      select:focus,
+      button:focus {
+        outline: none;
+        border: 2px solid #00ffcc;
+      }
+
+      button {
+        background-color: #00ffcc;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #00e6b8;
+      }
+
+      .contact-section {
+        background-color: #1a1a1a;
+        padding: 2rem;
+        text-align: center;
+        margin-top: 3rem;
+        border-top: 1px solid #333;
+      }
+
+      .contact-section a {
+        color: #00ffcc;
+        text-decoration: none;
+      }
+
+      .contact-section a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links ul {
+          display: none;
+          flex-direction: column;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        .nav-links.active ul {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="logo">
+<!--        <img src="{{ url_for('static', filename='img/logo.jpeg') }}" alt="Logo" />-->
+        <span>PredictivePulse</span>
+      </div>
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav class="nav-links" id="navLinks">
+        <ul>
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('details') }}">About</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+          <li><a id="Checkbtn" href="{{ url_for('predict_page') }}">Check Your BP Stage</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Form Section -->
+    <div class="form-card">
+      <h1>PREDICT YOUR BLOOD PRESSURE STAGE</h1>
+      <form action="{{ url_for('predict') }}" method="post" class="form-grid">
+        <select name="Gender" required>
+          <option value="">What is your gender?</option>
+          <option value="Female">Female</option>
+          <option value="Male">Male</option>
+        </select>
+
+        <select name="Age" required>
+          <option value="">What is your age group?</option>
+          <option value="18-34">18-34</option>
+          <option value="35-50">35-50</option>
+          <option value="51-64">51-64</option>
+          <option value="65+">65+</option>
+        </select>
+
+        <select name="History" required>
+          <option value="">Do you have a history of high blood pressure?</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+
+        <select name="Patient" required>
+          <option value="">Are you the patient?</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+
+        <select name="TakeMedication" required>
+          <option value="">Are you currently taking any medication for blood pressure?</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+
+        <select name="Severity" required>
+          <option value="">How would you rate the severity of your blood pressure symptoms?</option>
+          <option value="Mild">Mild</option>
+          <option value="Moderate">Moderate</option>
+          <option value="Sever">Sever</option>
+        </select>
+
+        <select name="BreathShortness" required>
+          <option value="">Have you experienced shortness of breath recently?</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+
+        <select name="VisualChanges" required>
+          <option value="">Have you noticed any changes in your vision?</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+
+        <select name="NoseBleeding" required>
+          <option value="">Have you had any nosebleeds recently?</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+
+        <select name="Whendiagnoused" required>
+          <option value="">When were you diagnosed with high blood pressure?</option>
+          <option value="1 - 5 Years">1 - 5 Years</option>
+          <option value="<1 Year">&lt;1 Year</option>
+          <option value=">5 Years">&gt;5 Years</option>
+        </select>
+
+        <select name="Systolic" required>
+          <option value="">Most recent systolic reading?</option>
+          <option value="100+">100+</option>
+          <option value="111 - 120">111 - 120</option>
+          <option value="121 - 130">121 - 130</option>
+          <option value="130+">130+</option>
+        </select>
+
+        <select name="Diastolic" required>
+          <option value="">Most recent diastolic reading?</option>
+          <option value="70 - 80">70 - 80</option>
+          <option value="81 - 90">81 - 90</option>
+          <option value="91 - 100">91 - 100</option>
+          <option value="100+">100+</option>
+        </select>
+
+        <select name="ControlledDiet" required>
+          <option value="">Are you on a controlled/low-sodium diet?</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+
+        <button type="submit">Predict</button>
+      </form>
+    </div>
+
+    <footer id="contact" class="contact-section">
+      <p>Have questions or feedback? We’d love to hear from you!</p>
+      <p>Contact to Amrut Katkar</p>
+      <ul>
+        <li>Email: <a href="mailto:support@predictivepulse.ai">predictivepulseai.gmail.com</a></li>
+        <li>Phone: +91-9767101628</li>
+        <li>
+          Follow us on:
+          <a href="#">Twitter</a> |
+          <a href="#">LinkedIn</a> |
+          <a href="#">GitHub</a>
+        </li>
+      </ul>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        document.getElementById("navLinks").classList.toggle("active");
+      }
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

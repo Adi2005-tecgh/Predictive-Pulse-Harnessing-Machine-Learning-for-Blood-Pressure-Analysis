@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prediction Result</title>
+
+  <!-- Embedded Dark Theme CSS -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    header.navbar {
+      background-color: #1e1e1e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #333;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .logo span {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #00ffcc;
+    }
+
+    .nav-links ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links ul li a {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links ul li a:hover {
+      color: #00ffcc;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: white;
+      margin-bottom: 5px;
+    }
+
+    .result-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 70vh;
+      padding: 2rem;
+    }
+
+    .result-card {
+      background-color: #1e1e1e;
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .result-card h2 {
+      color: #00ffcc;
+      margin-bottom: 1rem;
+    }
+
+    .prediction-text {
+      font-size: 1.4rem;
+      color: #ffffff;
+      margin-bottom: 2rem;
+      padding: 0.8rem;
+      background-color: #2a2a2a;
+      border-radius: 8px;
+    }
+
+    .back-button {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background-color: #00ffcc;
+      color: #000000;
+      font-weight: bold;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #00e6b8;
+    }
+
+    .contact-section {
+      background-color: #1a1a1a;
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid #333;
+    }
+
+    .contact-section a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+
+    .contact-section a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links ul {
+        display: none;
+        flex-direction: column;
+      }
+
+      .nav-links.active ul {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="logo">
+<!--      <img src="{{ url_for('static', filename='/img/logo.jpeg') }}" alt="Logo" />-->
+      <span>PredictivePulse</span>
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav class="nav-links" id="navLinks">
+      <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('details') }}">About</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a id="Checkbtn" href="{{ url_for('predict_page') }}">Check Your BP Stage</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Prediction Result -->
+  <div class="result-container">
+    <div class="result-card">
+      <h2>🩺 Your Predicted Result</h2>
+      <p class="prediction-text">🔍 {{ prediction or 'No prediction received' }}</p>
+      <a class="back-button" href="{{ url_for('home') }}">← Go Back</a>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <footer id="contact" class="contact-section">
+    <h2>Contact to Amrut Katkar</h2>
+    <p>Have questions or feedback? We’d love to hear from you!</p>
+    <ul>
+      <li>Email: <a href="mailto:support@predictivepulse.ai">predictivepulseai.gmail.com</a></li>
+      <li>Phone: +91-9767101628</li>
+      <li>
+        Follow us on:
+        <a href="#">Twitter</a> |
+        <a href="#">LinkedIn</a> |
+        <a href="#">GitHub</a>
+      </li>
+    </ul>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById("navLinks");
+      navLinks.classList.toggle("active");
+    }
+  </script>
+</body>
+</html>

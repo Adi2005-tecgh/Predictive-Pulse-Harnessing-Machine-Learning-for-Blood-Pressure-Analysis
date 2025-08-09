@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PredictivePulse - Home</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      background-color: #0e0e0e;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+    .navbar {
+      background-color: #1a1a1a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #333;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+    .nav-links ul {
+      display: flex;
+      list-style: none;
+    }
+    .nav-links ul li a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      transition: color 0.3s;
+    }
+    .nav-links ul li a:hover {
+      color: #00ffae;
+    }
+    .landing {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 90vh;
+      padding: 2rem;
+      text-align: center;
+      background: linear-gradient(180deg, #111, #000);
+    }
+    .hero-title {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #00ffae;
+    }
+    .hero-subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 700px;
+    }
+    .cta-button {
+      padding: 0.8rem 2rem;
+      background-color: #00ffae;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .cta-button:hover {
+      background-color: #00d494;
+    }
+    .info-box {
+      padding: 3rem;
+      background-color: #1a1a1a;
+      margin: 2rem auto;
+      max-width: 900px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ffae33;
+    }
+    .info-box h2 {
+      color: #00ffae;
+      margin-bottom: 1.5rem;
+    }
+    .info-box ul li {
+      margin-bottom: 1rem;
+    }
+    footer.contact-section {
+      background-color: #111;
+      color: #aaa;
+      padding: 2rem;
+      text-align: center;
+    }
+    footer.contact-section a {
+      color: #00ffae;
+      text-decoration: none;
+    }
+    .menu-toggle {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .nav-links ul {
+        flex-direction: column;
+        display: none;
+      }
+      .nav-links ul.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+        cursor: pointer;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+<!--      <img src="{{ url_for('static', filename='img/logo.jpeg') }}" alt="Logo">-->
+      <span>PredictivePulse</span>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span>☰</span>
+    </div>
+    <nav class="nav-links" id="navLinks">
+      <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('details') }}">About</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="{{ url_for('predict_page') }}">Check BP Stage</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="landing">
+    <h1 class="hero-title">Welcome to Predictive Pulse 🩺</h1>
+    <p class="hero-subtitle">
+      Let us walk beside you on your health journey. From early detection to accurate prediction,
+      we make BP tracking easy, insightful, and focused on <em>you</em>.
+    </p>
+    <a class="cta-button" href="{{ url_for('predict_page') }}">Check Your Blood Pressure Stage</a>
+  </section>
+
+  <section class="info-box">
+    <h2>Understanding Blood Pressure Stages</h2>
+    <ul>
+      <li><strong>Normal:</strong> Systolic 90–120, Diastolic 60–80</li>
+      <li><strong>Elevated:</strong> Systolic 120–129, Diastolic less than 80</li>
+      <li><strong>Stage 1 Hypertension:</strong> Systolic 130–139, Diastolic 80–89</li>
+      <li><strong>Stage 2 Hypertension:</strong> Systolic ≥140, Diastolic ≥90</li>
+      <li><strong>Hypertensive Crisis:</strong> Systolic >180 and/or Diastolic >120 (Seek emergency care)</li>
+    </ul>
+    <p>Regular monitoring, a healthy lifestyle, and medical consultation are essential for blood pressure management.</p>
+  </section>
+
+  <footer id="contact" class="contact-section">
+    <h2>Contact to Amrut Katkar</h2>
+    <p>Have questions or feedback? We’d love to hear from you!</p>
+    <ul>
+      <li>Email: <a href="mailto:support@predictivepulse.ai">predictivepulseai.gmail.com</a></li>
+      <li>Phone: +91-9767101628</li>
+      <li>Follow us: <a href="#">Twitter</a> | <a href="#">LinkedIn</a> | <a href="#">GitHub</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("navLinks").querySelector("ul").classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
